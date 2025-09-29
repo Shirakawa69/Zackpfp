@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zack Xavier G. Refrea | Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="assets/profile.jpg" alt="Zack Refrea Logo" class="logo-img">
+                <span class="logo-text">Zack Refrea</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Hi, I'm Zack Xavier G. Refrea</h1>
+            <p>BSIT student at LSPU Los Baños. Passionate about web development and building real-world solutions.</p>
+            <button class="btn" id="hireBtn">Hire Me</button>
+        </div>
+    </section>
+
+    <!-- Email Modal -->
+    <div id="hire-modal" class="hire-modal">
+        <div class="hire-modal-content">
+            <span id="close-hire-modal" class="close-hire-modal">&times;</span>
+            <h2>Contact Zack</h2>
+            <p>Send me an email at <a href="mailto:zackroberteileen@gmail.com">zackroberteileen@gmail.com</a></p>
+        </div>
+    </div>
+
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <img src="assets/profile.jpg" alt="Profile Picture" class="profile-pic" id="pfp-img" style="cursor:pointer;">
+            <div>
+                <p>
+                    Hello! I'm <strong>Zack Xavier G. Refrea</strong>, a BSIT student at LSPU Los Baños. I am passionate about technology and love building web applications that solve real-world problems. My journey in IT has equipped me with hands-on experience in both frontend and backend development, as well as database management.
+                </p>
+                <div class="skills">
+                    <h3>Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-badge"><i class="fab fa-cuttlefish"></i> C#</span>
+                        <span class="skill-badge"><i class="fab fa-php"></i> PHP</span>
+                        <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
+                        <span class="skill-badge"><i class="fas fa-code"></i> Web Development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile Image Modal -->
+        <div id="pfp-modal" class="img-modal">
+            <span class="img-modal-content">
+                <img src="assets/profile.jpg" alt="Profile Picture">
+            </span>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <h2>My Work</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <span class="portfolio-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </span>
+                <img src="assets/clinic-screenshot.png" alt="LSPU Clinic System" id="clinic-img" style="cursor: pointer;">
+                <h3>LSPU Clinic System</h3>
+                <p>A comprehensive clinic management system for LSPU, built with PHP and MySQL.</p>
+            </div>
+        </div>
+        <!-- Popup Modal -->
+        <div id="img-modal" class="img-modal">
+            <span class="img-modal-content">
+                <img src="assets/clinic-screenshot.png" alt="LSPU Clinic System">
+            </span>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Contact Me</h2>
+        <div class="contact-icons">
+            <a href="mailto:zackroberteileen@gmail.com" title="Gmail">
+                <img src="assets/gmail.png" alt="Gmail" class="social-icon">
+            </a>
+            <a href="tel:09917704374" title="Phone">
+                <img src="assets/phone.png" alt="Phone" class="social-icon">
+            </a>
+            <a href="https://www.facebook.com/Zackyplays" target="_blank" title="Facebook">
+                <img src="assets/fb.png" alt="Facebook" class="social-icon">
+            </a>
+            <a href="https://www.instagram.com/shirakawa69/" target="_blank" title="Instagram">
+                <img src="assets/ig.png" alt="Instagram" class="social-icon">
+            </a>
+            <a href="https://x.com/shirakawa42069" target="_blank" title="X">
+                <img src="assets/x.png" alt="X" class="social-icon">
+            </a>
+        </div>
+        <p>Email: <a href="mailto:zackroberteileen@gmail.com" style="text-decoration:none; color:inherit;">zackroberteileen@gmail.com</a></p>
+        <p>Phone: <a href="tel:09917704374" style="text-decoration:none; color:inherit;">09917704374</a></p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    // Modal functionality
+    const img = document.getElementById('clinic-img');
+    const modal = document.getElementById('img-modal');
+    const modalImg = modal.querySelector('img');
+
+    img.onclick = function() {
+        modal.style.display = "flex";
+    }
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Email Modal functionality
+    const hireBtn = document.getElementById('hireBtn');
+    const hireModal = document.getElementById('hire-modal');
+    const closeHireModal = document.getElementById('close-hire-modal');
+
+    hireBtn.onclick = function() {
+        hireModal.style.display = "flex";
+    }
+    closeHireModal.onclick = function() {
+        hireModal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target === hireModal) {
+            hireModal.style.display = "none";
+        }
+    }
+
+    // Profile Image Modal functionality
+    const pfpImg = document.getElementById('pfp-img');
+    const pfpModal = document.getElementById('pfp-modal');
+    const closePfpModal = document.getElementById('close-pfp-modal');
+
+    pfpImg.onclick = function() {
+        pfpModal.style.display = "flex";
+    }
+    pfpModal.onclick = function(e) {
+        if (e.target === pfpModal) {
+            pfpModal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>
