@@ -44,21 +44,33 @@ const navLinks = document.querySelectorAll('.nav-links a');
 
 function activateNavLinkOnScroll() {
     let scrollY = window.pageYOffset;
+    let windowHeight = window.innerHeight;
+    let documentHeight = document.documentElement.scrollHeight;
 
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 60; // Adjust offset for header height
-        const sectionId = section.getAttribute('id');
+    if (scrollY < 50) {
+        // At top of page, remove all active highlights
+        navLinks.forEach(link => link.classList.remove('active'));
+    } else if (scrollY + windowHeight >= documentHeight - 5) {
+        // At bottom of page, highlight contact section
+        navLinks.forEach(link => link.classList.remove('active'));
+        const contactLink = document.querySelector('.nav-links a[href="#contact"]');
+        if (contactLink) contactLink.classList.add('active');
+    } else {
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 60; // Adjust offset for header height
+            const sectionId = section.getAttribute('id');
 
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + sectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    });
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
 }
 
 window.addEventListener('scroll', activateNavLinkOnScroll);
@@ -127,6 +139,11 @@ backToTopBtn.addEventListener('click', () => {
         top: 0,
         behavior: 'smooth'
     });
+    // Update nav highlight after scrolling to top
+    // Use a timeout to allow scroll to complete
+    setTimeout(() => {
+        activateNavLinkOnScroll();
+    }, 300);
 });
 
 
