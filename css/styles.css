@@ -519,6 +519,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+    }
     .hero h1 {
         font-size: 2rem;
     }
@@ -544,6 +547,8 @@ footer {
         transform: translateY(-20px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: 0 0 20px 20px;
+        max-width: 100vw;
+        box-sizing: border-box;
     }
 
     .nav-links.active {
@@ -559,18 +564,23 @@ footer {
 
     .nav-links a {
         display: block;
-        width: 100%;
+        width: auto;
+        max-width: 200px;
+        margin: 0 auto;
         text-align: center;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
         font-weight: 500;
         border-radius: 12px;
         background: rgba(255,255,255,0.05);
-        margin: 0;
+        margin: 0.3rem auto;
     }
 
     .mobile-menu-toggle {
         display: flex;
+        width: 45px;
+        height: 45px;
+        box-sizing: border-box;
     }
     
     .about,
