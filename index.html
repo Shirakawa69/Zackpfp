@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zack Xavier G. Refrea | Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -136,9 +132,6 @@
             <a href="tel:09917704374" title="Phone">
                 <img src="assets/phone.png" alt="Phone" class="social-icon">
             </a>
-            <a href="https://github.com/Shirakawa69" target="_blank" title="GitHub" class="github">
-                <img src="assets/github.png" alt="GitHub" class="social-icon">
-            </a>
             <a href="https://www.facebook.com/Zackyplays" target="_blank" title="Facebook">
                 <img src="assets/fb.png" alt="Facebook" class="social-icon">
             </a>
@@ -147,6 +140,9 @@
             </a>
             <a href="https://x.com/shirakawa42069" target="_blank" title="X">
                 <img src="assets/x.png" alt="X" class="social-icon">
+            </a>
+            <a href="https://github.com/Shirakawa69" target="_blank" title="GitHub" class="github">
+                <img src="assets/github.png" alt="GitHub" class="social-icon">
             </a>
         </div>
         <p>Email: <a href="mailto:zackroberteileen@gmail.com" style="text-decoration:none; color:inherit;">zackroberteileen@gmail.com</a></p>
@@ -161,71 +157,15 @@
     <script src="js/main.js"></script>
     <script>
 
-    // Enhanced Mobile Menu Toggle
+    // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
     mobileMenuBtn.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
         icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
     });
-
-    // Close mobile menu when clicking on a link
-    const navLinkItems = document.querySelectorAll('.nav-links a');
-    navLinkItems.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.className = 'fas fa-bars';
-        });
-    });
-
-    // Navbar scroll animation
-    const header = document.querySelector('header');
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-
-    // Active section highlighting
-    const sections = document.querySelectorAll('section[id]');
-    const navLinksAll = document.querySelectorAll('.nav-links a');
-    
-    function updateActiveSection() {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinksAll.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', updateActiveSection);
-    
-    // Initialize active section on page load
-    updateActiveSection();
 
     // Scroll Animation Observer
     const observerOptions = {

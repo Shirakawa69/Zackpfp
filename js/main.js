@@ -37,3 +37,96 @@ pfpModal.onclick = function(e) {
         pfpModal.style.display = "none";
     }
 }
+
+// Navigation active link highlighting based on scroll position
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+function activateNavLinkOnScroll() {
+    let scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 60; // Adjust offset for header height
+        const sectionId = section.getAttribute('id');
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + sectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+window.addEventListener('scroll', activateNavLinkOnScroll);
+
+// Initial call to set active link on page load
+activateNavLinkOnScroll();
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navLinksMenu = document.querySelector('.nav-links');
+
+mobileMenuBtn.addEventListener('click', () => {
+    navLinksMenu.classList.toggle('active');
+    const icon = mobileMenuBtn.querySelector('i');
+    icon.className = navLinksMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+});
+
+// Update active nav link on click
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        // Close mobile menu after click
+        if (navLinksMenu.classList.contains('active')) {
+            navLinksMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = 'fas fa-bars';
+        }
+    });
+});
+
+// Scroll Animation Observer
+const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Observe animated elements
+document.querySelectorAll('.scale-in').forEach(el => {
+    observer.observe(el);
+});
+
+// Back to Top Button
+const backToTopBtn = document.getElementById('back-to-top');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+// Smooth scroll to top when clicked
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+
