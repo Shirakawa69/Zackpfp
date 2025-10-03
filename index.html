@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zack Xavier G. Refrea | Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -17,9 +21,13 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-toggle" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -49,15 +57,6 @@
                 <p>
                     Hello! I'm <strong>Zack Xavier G. Refrea</strong>, a BSIT student at LSPU Los Baños. I am passionate about technology and love building web applications that solve real-world problems. My journey in IT has equipped me with hands-on experience in both frontend and backend development, as well as database management.
                 </p>
-                <div class="skills">
-                    <h3>Skills</h3>
-                    <div class="skills-list">
-                        <span class="skill-badge"><i class="fab fa-cuttlefish"></i> C#</span>
-                        <span class="skill-badge"><i class="fab fa-php"></i> PHP</span>
-                        <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
-                        <span class="skill-badge"><i class="fas fa-code"></i> Web Development</span>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- Profile Image Modal -->
@@ -68,16 +67,56 @@
         </div>
     </section>
 
+    <section id="skills" class="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card scale-in">
+                <div class="skill-icon">
+                    <i class="fab fa-cuttlefish"></i>
+                </div>
+                <h4>C#</h4>
+                <p>Object-oriented programming language for building applications</p>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon">
+                    <i class="fab fa-php"></i>
+                </div>
+                <h4>PHP</h4>
+                <p>Server-side scripting language for web development</p>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h4>MySQL</h4>
+                <p>Relational database management system</p>
+            </div>
+            <div class="skill-card scale-in">
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h4>Web Development</h4>
+                <p>Full-stack web application development</p>
+            </div>
+        </div>
+    </section>
+
     <section id="portfolio" class="portfolio">
         <h2>My Work</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
+            <div class="portfolio-item scale-in">
                 <span class="portfolio-icon">
                     <i class="fas fa-stethoscope"></i>
                 </span>
                 <img src="assets/clinic-screenshot.png" alt="LSPU Clinic System" id="clinic-img" style="cursor: pointer;">
                 <h3>LSPU Clinic System</h3>
                 <p>A comprehensive clinic management system for LSPU, built with PHP and MySQL.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
             </div>
         </div>
         <!-- Popup Modal -->
@@ -97,6 +136,9 @@
             <a href="tel:09917704374" title="Phone">
                 <img src="assets/phone.png" alt="Phone" class="social-icon">
             </a>
+            <a href="https://github.com/Shirakawa69" target="_blank" title="GitHub" class="github">
+                <img src="assets/github.png" alt="GitHub" class="social-icon">
+            </a>
             <a href="https://www.facebook.com/Zackyplays" target="_blank" title="Facebook">
                 <img src="assets/fb.png" alt="Facebook" class="social-icon">
             </a>
@@ -111,8 +153,119 @@
         <p>Phone: <a href="tel:09917704374" style="text-decoration:none; color:inherit;">09917704374</a></p>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="js/main.js"></script>
     <script>
+
+    // Enhanced Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+    navLinkItems.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = 'fas fa-bars';
+        });
+    });
+
+    // Navbar scroll animation
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+
+    // Active section highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
+    
+    function updateActiveSection() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinksAll.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', updateActiveSection);
+    
+    // Initialize active section on page load
+    updateActiveSection();
+
+    // Scroll Animation Observer
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe animated elements
+    document.querySelectorAll('.scale-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Smooth scroll to top when clicked
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
     // Modal functionality
     const img = document.getElementById('clinic-img');
     const modal = document.getElementById('img-modal');
