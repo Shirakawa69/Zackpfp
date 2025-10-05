@@ -146,8 +146,10 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease';
         } else {
             entry.target.classList.remove('visible');
+            entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease';
         }
     });
 }, observerOptions);
