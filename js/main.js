@@ -78,15 +78,19 @@ window.addEventListener('scroll', activateNavLinkOnScroll);
 // Initial call to set active link on page load
 activateNavLinkOnScroll();
 
-// Mobile Menu Toggle
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const navLinksMenu = document.querySelector('.nav-links');
+if (!window.mobileMenuBtnInitialized) {
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinksMenu = document.querySelector('.nav-links');
 
-mobileMenuBtn.addEventListener('click', () => {
-    navLinksMenu.classList.toggle('active');
-    const icon = mobileMenuBtn.querySelector('i');
-    icon.className = navLinksMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-});
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinksMenu.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.className = navLinksMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+    });
+
+    window.mobileMenuBtnInitialized = true;
+}
 
 // Update active nav link on click
 navLinks.forEach(link => {
@@ -101,6 +105,36 @@ navLinks.forEach(link => {
         }
     });
 });
+
+const navLinksMenu = document.querySelector('.nav-links');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+// Close mobile menu when clicking on any nav link (for mobile)
+if (!window.mobileMenuAutoCloseInitialized) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinksMenu.classList.contains('active')) {
+                navLinksMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    });
+    window.mobileMenuAutoCloseInitialized = true;
+}
+
+function popOnHover(element) {
+    element.addEventListener('mouseenter', () => {
+        element.style.transform = 'translateY(-10px) scale(1.10)';
+        element.style.boxShadow = '0 12px 40px rgba(0,0,0,0.25)';
+        element.style.transition = 'transform 0.3s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s cubic-bezier(.23,1.01,.32,1)';
+    });
+    element.addEventListener('mouseleave', () => {
+        element.style.transform = '';
+        element.style.boxShadow = '';
+        element.style.transition = 'transform 0.3s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s cubic-bezier(.23,1.01,.32,1)';
+    });
+}
 
 // Scroll Animation Observer
 const observerOptions = {
@@ -119,6 +153,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe animated elements
 document.querySelectorAll('.scale-in').forEach(el => {
     observer.observe(el);
+    popOnHover(el);
 });
 
 // Back to Top Button
